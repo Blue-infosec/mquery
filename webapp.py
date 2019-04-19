@@ -17,7 +17,7 @@ from util import make_redis, make_serializer
 import config
 
 redis = make_redis()
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
 s = make_serializer()
 db = UrsaDb(config.BACKEND)
 
@@ -190,6 +190,11 @@ def serve_index_sub():
 @app.route('/manifest.json', defaults={'path': 'manifest.json'})
 def serve_root(path):
     return send_from_directory('mqueryfront/build', path)
+
+
+@app.route('/static/<path:path>')
+def serve_static(path):
+    return send_from_directory('mqueryfront/build/static', path)
 
 
 if __name__ == "__main__":
