@@ -1,5 +1,10 @@
 *.pyc
 venv/
+<<<<<<< HEAD
 __pycache__
 .vscode/
 config.py
+=======
+config.py
+.vscode
+>>>>>>> 371d56c4631ee779d2d02e90a4466f7f1bbe064d

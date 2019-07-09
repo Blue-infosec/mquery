@@ -26,19 +26,31 @@ Build and install mquery manually.
 
 1. Install and configure ursadb first [TODO LINK]
 
+2. Clone the source code
+
+```bash
+$ git clone https://github.com/CERT-Polska/mquery.git
+cd mquery
+```
+
 2. Build the frontend
 
 ```bash
-$ sudo apt install -y nodejs npm python3
-$ git clone https://github.com/CERT-Polska/mquery.git
+$ sudo apt install -y nodejs npm
+$ cp src/config.dist.js src/config.js
 $ cd mqueryfront
 $ npm install
+$ npm run build
 ```
 
 3. Configure and run the website
 
+```bash
+$ sudo apt install python3
 $ pip install -r requirements.txt
 $ cp config.example.py config.py
+$ python3 webapp.py --host 127.0.0.1 --port 5000  # consider uwsgi for production
+```
 
 ## 4. Kubernetes deployment
 
