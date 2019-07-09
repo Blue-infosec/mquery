@@ -77,9 +77,8 @@ git clone https://github.com/CERT-Polska/mquery.git
 Then, install the requirements.txt
 
 ```
-python3 -mvenv venv
-./venv/bin/activate  # or source venv/bin/activate.fish for some of us
-pip install -r requirements.txt
+python3 -mvenv venv; ./venv/bin/activate  # optional
+pip3 install -r requirements.txt
 ```
 
 Verify that it installed correctly with the following commands: 
@@ -102,6 +101,14 @@ Build and install frontend
 cd mqueryfront
 npm install
 npm run build
+```
+
+Start the web application and worker
+```
+# terminal 1:
+python webapp.py
+# terminal 2:
+python daemon.py
 ```
 
 ## First steps
