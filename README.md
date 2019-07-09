@@ -43,12 +43,13 @@ PyPi is currently a recommended way to install mquery. First, install the depend
 
 ```
 sudo apt install redis-server
+wget TODO.deb; sudo dpkg -i TODO.deb
 ```
 
 Then, install mquery itself:
 
 ```
-pip3 install mquery
+pip3 install mquery ursadb
 ```
 
 Verify that it installed correctly with the following commands: 
