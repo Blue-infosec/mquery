@@ -39,10 +39,15 @@ rule find_exceptions: trojan
 
 ## Installation from PyPi (recommended method)
 
-Easy way to install the software is to install it directly from PyPi
+PyPi is currently a recommended way to install mquery. First, install dependencies:
 
 ```
-# install mquery
+sudo apt install redis-server
+```
+
+Then, install mquery itself:
+
+```
 pip3 install mquery
 ```
 
