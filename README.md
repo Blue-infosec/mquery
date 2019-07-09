@@ -89,10 +89,11 @@ mquery_daemon --version
 ursadb_cli --version
 ```
 
-Use default config:
+Use default configs:
 
 ```
 cp config.example.py config.py
+cp mqueryfront/src/config.dist.js mqueryfront/src/config.js
 ```
 
 Build and install frontend
