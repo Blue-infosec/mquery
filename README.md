@@ -39,7 +39,7 @@ rule find_exceptions: trojan
 
 ## Installation from PyPi (recommended method)
 
-PyPi is currently a recommended way to install mquery. First, install dependencies:
+PyPi is currently a recommended way to install mquery. First, install the dependencies:
 
 ```
 sudo apt install redis-server
@@ -59,6 +59,49 @@ ursadb_cli --version
 ```
 
 (TODO systemd install)
+
+## Installation from source (for developers and contributors)
+
+First, install the dependencies:
+
+```
+sudo apt install redis-server
+```
+
+Then, clone the repository:
+
+```
+git clone https://github.com/CERT-Polska/mquery.git
+```
+
+Then, install the requirements.txt
+
+```
+python3 -mvenv venv
+./venv/bin/activate  # or source venv/bin/activate.fish for some of us
+pip install -r requirements.txt
+```
+
+Verify that it installed correctly with the following commands: 
+```
+mquery --version
+mquery_daemon --version
+ursadb_cli --version
+```
+
+Use default config:
+
+```
+cp config.example.py config.py
+```
+
+Build and install frontend
+
+```
+cd mqueryfront
+npm install
+npm run build
+```
 
 ## First steps
 
