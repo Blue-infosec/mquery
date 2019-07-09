@@ -9,16 +9,15 @@ from flask import Flask, request, jsonify, send_file, send_from_directory
 from werkzeug.exceptions import NotFound
 from zmq import Again
 
-from lib.ursadb import UrsaDb
-from lib.yaraparse import YaraParser
+from .lib.ursadb import UrsaDb
+from .lib.yaraparse import YaraParser
 import plyara
 
-from util import make_redis, make_serializer
-import config
+from .util import make_redis
+import mquery.config as config
 
 redis = make_redis()
 app = Flask(__name__, static_url_path="")
-s = make_serializer()
 db = UrsaDb(config.BACKEND)
 
 

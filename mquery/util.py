@@ -3,7 +3,7 @@ import logging
 from itsdangerous import JSONWebSignatureSerializer
 from redis import StrictRedis
 
-import config
+import mquery.config as config
 
 
 LOG_FORMAT = "[%(asctime)s][%(levelname)s] %(message)s"
@@ -21,6 +21,3 @@ def make_redis():
         host=config.REDIS_HOST, port=config.REDIS_PORT, decode_responses=True
     )
 
-
-def make_serializer():
-    return JSONWebSignatureSerializer(config.SECRET_KEY)

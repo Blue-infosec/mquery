@@ -1,7 +1,7 @@
 import os
 import re
 
-from metadata import Metadata
+from mquery.metadata import Metadata
 
 
 class CuckooAnalysisMetadata(Metadata):

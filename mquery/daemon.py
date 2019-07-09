@@ -6,10 +6,10 @@ import yara
 from functools import lru_cache
 import plyara
 from yara import SyntaxError
-import config
-from lib.ursadb import UrsaDb
-from lib.yaraparse import YaraParser
-from util import make_redis, setup_logging
+import mquery.config as config
+from .lib.ursadb import UrsaDb
+from .lib.yaraparse import YaraParser
+from .util import make_redis, setup_logging
 
 redis = make_redis()
 db = UrsaDb(config.BACKEND)
