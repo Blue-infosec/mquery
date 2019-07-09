@@ -11,11 +11,15 @@ LOG_DATEFMT = "%d/%m/%Y %H:%M:%S"
 
 
 def setup_logging():
-    logging.basicConfig(level=logging.INFO, format=LOG_FORMAT, datefmt=LOG_DATEFMT)
+    logging.basicConfig(
+        level=logging.INFO, format=LOG_FORMAT, datefmt=LOG_DATEFMT
+    )
 
 
 def make_redis():
-    return StrictRedis(host=config.REDIS_HOST, port=config.REDIS_PORT, decode_responses=True)
+    return StrictRedis(
+        host=config.REDIS_HOST, port=config.REDIS_PORT, decode_responses=True
+    )
 
 
 def make_serializer():

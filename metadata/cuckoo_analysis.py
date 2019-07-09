@@ -29,11 +29,14 @@ class CuckooAnalysisMetadata(Metadata):
         except OSError:
             return {}
 
-        binary_hash = target.split('/')[-1]
+        binary_hash = target.split("/")[-1]
 
         obj = {
             "cuckoo_hash": {"value": binary_hash},
-            "cuckoo_analysis": {"display_text": "cuckoo:{}".format(analysis_id), "value": analysis_id}
+            "cuckoo_analysis": {
+                "display_text": "cuckoo:{}".format(analysis_id),
+                "value": analysis_id,
+            },
         }
 
         self.cache_store(analysis_id, obj)
