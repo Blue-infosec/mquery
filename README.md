@@ -2,14 +2,13 @@
 
 Ever had trouble searching for particular malware samples? Our project is an analyst-friendly web GUI to look through your digital warehouse.
 
-mquery can be used to search through terabytes of malware in a blink of an eye:
+You can use mquery to search through terabytes of malware in a blink of an eye:
 
 ![mquery web GUI](docs/mquery-web-ui.gif?raw=1)
 
-Thanks to the [UrsaDB database](https://github.com/CERT-Polska/ursadb), queries on large datasets can be extremely fast.
+Under the hood, mquery uses [UrsaDB trigram database](https://github.com/CERT-Polska/ursadb) to do the heavy lifting.
 
 
-<<<<<<< HEAD
 ## How does it work?
 
 YARA is pretty fast, but searching through large dataset for given signature can take a lot of time. To countermeasure this, we have implemented a custom database called UrsaDB. It is able to pre-filter the results, so it is only necessary to run YARA against a small fraction of binaries:
@@ -17,17 +16,14 @@ YARA is pretty fast, but searching through large dataset for given signature can
 ![mquery flowchart](docs/mquery-flowchart.png?raw=1)
 
 
-## Installation (Docker)
-=======
 Demo
 -----------------
 
 Take a look at [https://mquery.tailcall.net](https://mquery.tailcall.net) for a quick demo.
->>>>>>> 371d56c4631ee779d2d02e90a4466f7f1bbe064d
 
 Unfortunately, you won't find any actual malware there. For demo purposes we
-have indexed the sources of this project - so you can try to find all exceptions
-in our source code by using this yara rule:
+have indexed the sources of this project - for example, you can find all occurences
+of the string "Exception" in the source code with this yara rule:
 
 ```
 rule find_exceptions: trojan
@@ -41,23 +37,29 @@ rule find_exceptions: trojan
 }
 ```
 
+## Installation from PyPi (recommended method)
 
-How does it work?
------------------
+Easy way to install the software is to install it directly from PyPi
 
-YARA is pretty fast, but searching through large dataset for given signature can take a lot of time. To countermeasure this, we have implemented a custom database called UrsaDB. It is able to pre-filter the results, so it is only necessary to run YARA against a small fraction of binaries:
+```
+# install mquery
+pip3 install mquery
+```
 
-![mquery flowchart](docs/mquery-flowchart.png?raw=1)
+Verify that it installed correctly with the following commands: 
+```
+mquery --version
+mquery_daemon --version
+ursadb_cli --version
+```
 
+(TODO systemd install)
 
-## Quick start
+## First steps
 
-1. Start up the whole system (see `Installation (Docker)`).
-2. Web interface (by default) should be available on `http://localhost:80/`
-3. Upload files to be indexed to the `samples` directory, which is bind-mounted to all containers at `/mnt/samples`.
-4. Execute `sudo docker-compose run ursadb-cli tcp://ursadb:9281 --cmd 'index "/mnt/samples";'`. This will tell the database to index all the files in `/mnt/samples` (change the path depending on your system).
-5. The command should output the progress. Wait until the task is finished.
-6. After successful indexing, your files should be searchable. Open the web interface and upload some YARA rule, e.g.:
+1. After installation, web interface should be available on `http://localhost:80/`
+2. todo index
+3. After successful indexing, your files should be searchable. Open the web interface and upload some YARA rule, e.g.:
 
 ```
 rule emotet4_basic: trojan
@@ -72,41 +74,7 @@ rule emotet4_basic: trojan
 }
 ```
 
-Note: Any administrative tasks can be performed using ursacb-cli.
-See [CERT-Polska/ursadb](https://github.com/CERT-Polska/ursadb#queries) for a complete list of supported commands.
-
-
-Installation (Docker)
----------------------
-
-Easy way to install the software is to build it from sources using `docker-compose`:
-
-```
-git clone --recurse-submodules https://github.com/CERT-Polska/mquery.git
-docker-compose up --scale daemon=3
-```
-
-where `--scale daemon=...` refers to the number of workers which will simultaneously process select/index jobs.
-
-Hint: Your `docker-compose` must support v3 syntax of `docker-compose.yml`. Update your software if you have any problems.
-
-For a production environment consider using kubernetes (take a look at `kuebrnetes` directory to get you started)
-or a manual installation (see below).
-
-
-Installation (Manual)
----------------------
-
-There are three separate components:
-
-- ursadb (backend) - Run `db.ursa tcp://0.0.0.0:9281` after compilation. (will listen on tcp port 9281).
-  Needs persistent storage at cwd (for docker deployments use a volume. You don't need to do anything special for bare metal installations)
-- mquery (web ui) - After creating a valid `config.py` run `python3 webapp.py` or expose it via uwsgi.
-- daemon - daemon to pick up yara queries. Uses the same `config.py` file. You can use more than one daemon.
-
-You need to mount files indexed by ursadb at the same logical path in mquery and daemons.
-
-You also need to have a redis server somewhere (used as a task queue for mquery and daemon)
+For administrative commands, see [CERT-Polska/ursadb](https://github.com/CERT-Polska/ursadb#queries).
 
 
 ## Maintainers
